@@ -1,4 +1,5 @@
 require 'minitest/autorun'
+require_relative '../src/customer_validator'
 
 describe CustomerValidator do
   describe 'when supplied a valid customer' do

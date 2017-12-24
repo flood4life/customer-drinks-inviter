@@ -1,0 +1,2 @@
+class CustomerDrinksInvitePredicate
+end

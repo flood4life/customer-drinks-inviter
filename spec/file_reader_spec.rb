@@ -1,4 +1,5 @@
 require 'minitest/autorun'
+require_relative '../src/file_reader'
 
 describe FileReader do
   describe 'when file is present' do
@@ -8,6 +9,10 @@ describe FileReader do
         file.write('123\n456')
         file.close
         @file_reader = FileReader.new('correct.json')
+      end
+
+      after do
+        File.delete('correct.json')
       end
 
       describe '#each_line' do

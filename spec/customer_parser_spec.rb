@@ -1,4 +1,5 @@
 require 'minitest/autorun'
+require_relative '../src/customer_parser'
 
 describe CustomerParser do
   describe 'when input is a valid JSON' do

@@ -1,4 +1,5 @@
 require 'minitest/autorun'
+require_relative '../src/distance_calculator'
 
 describe DistanceCalculator do
   describe 'when input is correct' do
