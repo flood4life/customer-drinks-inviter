@@ -25,9 +25,9 @@ describe CustomerParser do
   end
 
   describe 'when input is not a valid JSON' do
-    it 'raises an ArgumentError' do
+    it 'raises a CustomerParser::ParseError' do
       input = 'really not a JSON'
-      assert_raises ArgumentError do
+      assert_raises CustomerParser::ParseError do
         CustomerParser.call(input)
       end
     end

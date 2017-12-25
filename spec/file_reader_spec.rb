@@ -5,10 +5,10 @@ describe FileReader do
   describe 'when file is present' do
     describe 'when file is readable' do
       before do
-        file = File.new('correct.json', 'w')
-        file.puts('123')
-        file.puts('456')
-        file.close
+        File.open('correct.json', 'w') do |f|
+          f.puts('123')
+          f.puts('456')
+        end
         @file_reader = FileReader.new('correct.json')
       end
 
@@ -37,9 +37,9 @@ describe FileReader do
     describe 'when file is not readable' do
       it 'raises a FileReader::PermissionError' do
         filename = 'not_readable'
-        file = File.new(filename, 'w')
-        file.chmod(0o000) # UNIX permissions
-        file.close
+        File.open(filename, 'w', 0o000) do
+          # empty block
+        end
         assert_raises FileReader::PermissionError do
           FileReader.new(filename)
         end

@@ -1,4 +1,7 @@
 class DistanceCalculator
+  class DistanceCalculator::ArgumentError < ArgumentError
+  end
+
   class << self
     def call(point1, point2)
       assign_input(point1, point2)
@@ -53,7 +56,7 @@ class DistanceCalculator
     end
 
     def raise_exception(point_index, entity, value)
-      raise ArgumentError, "Point #{point_index} has invalid #{entity} of #{value}"
+      raise DistanceCalculator::ArgumentError, "Point #{point_index} has invalid #{entity} of #{value}"
     end
   end
 end

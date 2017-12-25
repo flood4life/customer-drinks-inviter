@@ -20,4 +20,8 @@ class FileReader
       yield line.chomp
     end
   end
+
+  def close
+    @file.close
+  end
 end

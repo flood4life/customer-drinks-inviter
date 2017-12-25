@@ -26,20 +26,20 @@ describe DistanceCalculator do
   end
 
   describe 'when input is incorrect' do
-    it 'raises an ArgumentError' do
-      assert_raises ArgumentError do
+    it 'raises a DistanceCalculator::ArgumentError' do
+      assert_raises DistanceCalculator::ArgumentError do
         latitude_out_of_bounds = { latitude: 100, longitude: 10 }
         DistanceCalculator.call(latitude_out_of_bounds, latitude_out_of_bounds)
       end
-      assert_raises ArgumentError do
+      assert_raises DistanceCalculator::ArgumentError do
         longitude_out_of_bounds = { latitude: 10, longitude: 200 }
         DistanceCalculator.call(longitude_out_of_bounds, longitude_out_of_bounds)
       end
-      assert_raises ArgumentError do
+      assert_raises DistanceCalculator::ArgumentError do
         missing_longitude = { latitude: 10 }
         DistanceCalculator.call(missing_longitude, missing_longitude)
       end
-      assert_raises ArgumentError do
+      assert_raises DistanceCalculator::ArgumentError do
         missing_latitude = { longitude: 10 }
         DistanceCalculator.call(missing_latitude, missing_latitude)
       end
