@@ -7,7 +7,7 @@ describe CustomerDrinksInvitePredicate do
       error = assert_raises ArgumentError do
         CustomerDrinksInvitePredicate.new(max_distance: -1)
       end
-      assert_match /max_distance should be a non-negative number, got -1:Integer/, error.message
+      assert_match(/max_distance should be a non-negative number, got -1:Integer/, error.message)
     end
   end
 
@@ -16,7 +16,7 @@ describe CustomerDrinksInvitePredicate do
       error = assert_raises ArgumentError do
         CustomerDrinksInvitePredicate.new(max_distance: '1')
       end
-      assert_match /max_distance should be a non-negative number, got 1:String/, error.message
+      assert_match(/max_distance should be a non-negative number, got 1:String/, error.message)
     end
   end
 
@@ -26,7 +26,7 @@ describe CustomerDrinksInvitePredicate do
         predicate = CustomerDrinksInvitePredicate.new(max_distance: 1)
         predicate.call(-1)
       end
-      assert_match /distance should be a non-negative number, got -1:Integer/, error.message
+      assert_match(/distance should be a non-negative number, got -1:Integer/, error.message)
     end
   end
 
@@ -36,7 +36,7 @@ describe CustomerDrinksInvitePredicate do
         predicate = CustomerDrinksInvitePredicate.new(max_distance: 1)
         predicate.call('1')
       end
-      assert_match /distance should be a non-negative number, got 1:String/, error.message
+      assert_match(/distance should be a non-negative number, got 1:String/, error.message)
     end
   end
 

@@ -29,7 +29,7 @@ describe FileReader do
           error = assert_raises LocalJumpError do
             @file_reader.each_line
           end
-          assert_match /no block given/, error.message
+          assert_match(/no block given/, error.message)
         end
       end
     end
@@ -53,7 +53,7 @@ describe FileReader do
       error = assert_raises ArgumentError do
         FileReader.new('non_existent')
       end
-      assert_match /File with a name `non_existent` is not present/, error.message
+      assert_match(/File with a name `non_existent` is not present/, error.message)
     end
   end
 end
