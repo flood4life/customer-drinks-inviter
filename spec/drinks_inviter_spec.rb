@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-
+require_relative 'spec_helper'
 require_relative '../lib/drinks_inviter'
 require_relative '../lib/customer_drinks_invite_predicate'
 
