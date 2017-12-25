@@ -6,7 +6,8 @@ describe FileReader do
     describe 'when file is readable' do
       before do
         file = File.new('correct.json', 'w')
-        file.write('123\n456')
+        file.puts('123')
+        file.puts('456')
         file.close
         @file_reader = FileReader.new('correct.json')
       end
@@ -23,24 +24,36 @@ describe FileReader do
           end
           assert_equal %w[123 456], read_lines
         end
+
+        it 'raises an error when no block is given' do
+          error = assert_raises LocalJumpError do
+            @file_reader.each_line
+          end
+          assert_match /no block given/, error.message
+        end
       end
     end
 
     describe 'when file is not readable' do
-      it 'raises a FilePermissionError' do
-        file = File.new('not_readable', 'rw', 0o000) # UNIX permissions
+      it 'raises a FileReader::PermissionError' do
+        filename = 'not_readable'
+        file = File.new(filename, 'w')
+        file.chmod(0o000) # UNIX permissions
         file.close
-        assert_raises FilePermissionError do
-          FileReader.new('not_readable')
+        assert_raises FileReader::PermissionError do
+          FileReader.new(filename)
         end
+        File.chmod(0o777, filename)
+        File.delete(filename)
       end
     end
   end
   describe 'when file is not present' do
-    it 'raises a DocumentError' do
-      assert_raises DocumentError do
+    it 'raises an ArgumentError' do
+      error = assert_raises ArgumentError do
         FileReader.new('non_existent')
       end
+      assert_match /File with a name `non_existent` is not present/, error.message
     end
   end
 end
