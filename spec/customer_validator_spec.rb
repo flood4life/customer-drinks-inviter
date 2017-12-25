@@ -74,6 +74,13 @@ describe CustomerValidator do
         assert_equal false, CustomerValidator.call(string_user_id)
         assert_equal false, CustomerValidator.call(array_user_id)
       end
+
+      it 'rejects when user id is less or equal than 0' do
+        zero_user_id = { latitude: 51.92893, user_id: 0, name: "Alice Cahill", longitude: -10.27699 }
+        negative_user_id = { latitude: 51.92893, user_id: -1, name: "Alice Cahill", longitude: -10.27699 }
+        assert_equal false, CustomerValidator.call(zero_user_id)
+        assert_equal false, CustomerValidator.call(negative_user_id)
+      end
     end
 
     describe 'when name is invalid' do
