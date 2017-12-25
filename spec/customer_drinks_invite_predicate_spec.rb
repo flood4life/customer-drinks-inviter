@@ -4,9 +4,10 @@ require_relative '../src/customer_drinks_invite_predicate'
 describe CustomerDrinksInvitePredicate do
   describe 'when maximum distance is negative' do
     it 'raises an ArgumentError' do
-      assert_raises ArgumentError do
+      error = assert_raises ArgumentError do
         CustomerDrinksInvitePredicate.new(max_distance: -1)
       end
+      assert_match /max_distance should be positive/, error.message
     end
   end
 
