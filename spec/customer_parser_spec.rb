@@ -8,8 +8,8 @@ describe CustomerParser do
         {"user_id": 1, "name": "Alex", "unknown_key": 2}
       JSON
       parsed = CustomerParser.call(input)
-      assert_empty parsed[:unknown_key]
-      assert_empty parsed['unknown_key']
+      assert_nil parsed[:unknown_key]
+      assert_nil parsed['unknown_key']
       assert_equal 1, parsed[:user_id]
       assert_equal 'Alex', parsed[:name]
     end
