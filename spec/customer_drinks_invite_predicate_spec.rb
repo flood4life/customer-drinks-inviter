@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../src/customer_drinks_invite_predicate'
+require_relative '../lib/customer_drinks_invite_predicate'
 
 describe CustomerDrinksInvitePredicate do
   describe 'when maximum distance is negative' do

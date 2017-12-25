@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../src/file_reader'
+require_relative '../lib/file_reader'
 
 describe FileReader do
   describe 'when file is present' do

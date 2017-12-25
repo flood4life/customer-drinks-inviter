@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 
-require_relative '../src/drinks_inviter'
-require_relative '../src/customer_drinks_invite_predicate'
+require_relative '../lib/drinks_inviter'
+require_relative '../lib/customer_drinks_invite_predicate'
 
 describe DrinksInviter do
   before do
@@ -22,7 +22,11 @@ describe DrinksInviter do
   it 'parses a file and outputs eligible customers (based on a predicate) ordered by user_id' do
     predicate = CustomerDrinksInvitePredicate.new(max_distance: 100e3)
     dublin_office  = { latitude: 53.339428, longitude: -6.257664 }
-    drinks_inviter = DrinksInviter.new(predicate: predicate, filename: @filename, center: dublin_office)
+    drinks_inviter = DrinksInviter.new(
+      predicate: predicate,
+      filename: @filename,
+      center: dublin_office
+    )
     assert_output("Patricia Cahill (1)\nIan McArdle (2)\n") do
       drinks_inviter.call
     end
@@ -32,7 +36,12 @@ describe DrinksInviter do
     predicate = CustomerDrinksInvitePredicate.new(max_distance: 100e3)
     dublin_office  = { latitude: 53.339428, longitude: -6.257664 }
     formatter = ->(customer) { "ID: #{customer[:user_id]}, Name: #{customer[:name]}" }
-    drinks_inviter = DrinksInviter.new(predicate: predicate, filename: @filename, center: dublin_office, formatter: formatter)
+    drinks_inviter = DrinksInviter.new(
+      predicate: predicate,
+      filename: @filename,
+      center: dublin_office,
+      formatter: formatter
+    )
     assert_output("ID: 1, Name: Patricia Cahill\nID: 2, Name: Ian McArdle\n") do
       drinks_inviter.call
     end
@@ -41,8 +50,13 @@ describe DrinksInviter do
   it 'allows to use a custom sort_by value' do
     predicate = CustomerDrinksInvitePredicate.new(max_distance: 100e3)
     dublin_office  = { latitude: 53.339428, longitude: -6.257664 }
-    sorter = ->(customer) { -customer[:user_id] }
-    drinks_inviter = DrinksInviter.new(predicate: predicate, filename: @filename, center: dublin_office, sorter: sorter)
+    sorter = ->(customer) { -customer[:user_id] } # DESC by user_id
+    drinks_inviter = DrinksInviter.new(
+      predicate: predicate,
+      filename: @filename,
+      center: dublin_office,
+      sorter: sorter
+    )
     assert_output("Ian McArdle (2)\nPatricia Cahill (1)\n") do
       drinks_inviter.call
     end
