@@ -1,6 +1,6 @@
 class CustomerDrinksInvitePredicate
-  def initialize(**options)
-    @max_distance = options[:max_distance]
+  def initialize(max_distance:)
+    @max_distance = max_distance
     raise_exception(:max_distance, @max_distance) unless check_entity(@max_distance)
   end
 
