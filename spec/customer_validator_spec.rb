@@ -22,7 +22,7 @@ describe CustomerValidator do
 
       it 'rejects when latitude is not a number' do
         string_latitude = { latitude: "51.92893", user_id: 1, name: "Alice Cahill", longitude: -10.27699 }
-        array_latitude = { latitude: [51.92893], user_id: 1, name: "Alice Cahill", longitude: -10.27699 }
+        array_latitude  = { latitude: [51.92893], user_id: 1, name: "Alice Cahill", longitude: -10.27699 }
         assert_equal false, CustomerValidator.call(string_latitude)
         assert_equal false, CustomerValidator.call(array_latitude)
       end
@@ -46,7 +46,7 @@ describe CustomerValidator do
 
       it 'rejects when longitude is not a number' do
         string_longitude = { latitude: 51.92893, user_id: 1, name: "Alice Cahill", longitude: "-10.27699" }
-        array_longitude = { latitude: 51.92893, user_id: 1, name: "Alice Cahill", longitude: [-10.27699] }
+        array_longitude  = { latitude: 51.92893, user_id: 1, name: "Alice Cahill", longitude: [-10.27699] }
         assert_equal false, CustomerValidator.call(string_longitude)
         assert_equal false, CustomerValidator.call(array_longitude)
       end
@@ -70,13 +70,13 @@ describe CustomerValidator do
 
       it 'rejects when user id is not a number' do
         string_user_id = { latitude: 51.92893, user_id: "1", name: "Alice Cahill", longitude: -10.27699 }
-        array_user_id = { latitude: 51.92893, user_id: [1], name: "Alice Cahill", longitude: -10.27699 }
+        array_user_id  = { latitude: 51.92893, user_id: [1], name: "Alice Cahill", longitude: -10.27699 }
         assert_equal false, CustomerValidator.call(string_user_id)
         assert_equal false, CustomerValidator.call(array_user_id)
       end
 
       it 'rejects when user id is less or equal than 0' do
-        zero_user_id = { latitude: 51.92893, user_id: 0, name: "Alice Cahill", longitude: -10.27699 }
+        zero_user_id     = { latitude: 51.92893, user_id: 0, name: "Alice Cahill", longitude: -10.27699 }
         negative_user_id = { latitude: 51.92893, user_id: -1, name: "Alice Cahill", longitude: -10.27699 }
         assert_equal false, CustomerValidator.call(zero_user_id)
         assert_equal false, CustomerValidator.call(negative_user_id)
