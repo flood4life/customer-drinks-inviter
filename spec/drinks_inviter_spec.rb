@@ -60,4 +60,33 @@ describe DrinksInviter do
       drinks_inviter.call
     end
   end
+
+  it 'raises an ArgumentError when a required key is not supplied' do
+    dublin_office = { latitude: 53.339428, longitude: -6.257664 }
+    predicate     = CustomerDrinksInvitePredicate.new(max_distance: 100e3)
+
+    no_predicate_error = assert_raises ArgumentError do
+      DrinksInviter.new(
+        filename: @filename,
+        center:   dublin_office
+      )
+    end
+    assert_match(/Key :predicate is required/, no_predicate_error.message)
+
+    no_filename_error = assert_raises ArgumentError do
+      DrinksInviter.new(
+        predicate: predicate,
+        center:    dublin_office
+      )
+    end
+    assert_match(/Key :filename is required/, no_filename_error.message)
+
+    no_center_error = assert_raises ArgumentError do
+      DrinksInviter.new(
+        predicate: predicate,
+        filename:  @filename
+      )
+    end
+    assert_match(/Key :center is required/, no_center_error.message)
+  end
 end

@@ -6,7 +6,7 @@ require_relative 'customer_parser'
 class DrinksInviter
   def initialize(**options)
     %i[filename predicate center].each do |key|
-      raise ArgumentError, "Key #{key} is required" unless options[key]
+      raise ArgumentError, "Key :#{key} is required" unless options[key]
     end
     @file_reader = FileReader.new(options[:filename])
     @predicate   = options[:predicate]
